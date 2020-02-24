@@ -129,7 +129,8 @@ resource "aws_eip_association" "this" {
 #############
 
 data "aws_ami" "centos" {
-  most_recent = true
+  # most_recent = true
+  ami = " ami-4bf3d731 "
 
   filter {
     name = "name"
