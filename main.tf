@@ -25,7 +25,8 @@ resource "aws_instance" "this" {
   count = var.create ? 1 : 0
 
   instance_type = var.instance_type
-  ami = var.ami_id == "" ? data.aws_ami.centos.id : var.ami_id
+  ami = "ami-02eac2c0129f6376b"
+  # ami = var.ami_id == "" ? data.aws_ami.centos.id : var.ami_id
 
   # user_data = var.user_data == "" ? data.template_file.user_data.rendered : var.user_data
 
@@ -129,7 +130,7 @@ resource "aws_eip_association" "this" {
 #############
 
 data "aws_ami" "centos" {
-  most_recent = ami-02eac2c0129f6376b
+  most_recent = true
 
   filter {
     name = "name"
