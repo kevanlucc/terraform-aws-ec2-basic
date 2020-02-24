@@ -27,7 +27,7 @@ resource "aws_instance" "this" {
   instance_type = var.instance_type
   ami = var.ami_id == "" ? data.aws_ami.centos.id : var.ami_id
 
-  user_data = var.user_data == "" ? data.template_file.user_data.rendered : var.user_data
+  # user_data = var.user_data == "" ? data.template_file.user_data.rendered : var.user_data
 
   subnet_id = var.subnet_id == "" ? values(zipmap(data.aws_subnet.default.*.availability_zone, data.aws_subnet.default.*.id))[0] : var.subnet_id
 
