@@ -25,7 +25,7 @@ resource "aws_instance" "this" {
   count = var.create ? 1 : 0
 
   instance_type = var.instance_type
-  ami = var.ami_id == "" ? data.aws_ami.ubuntu.id : var.ami_id
+  ami = var.ami_id == "" ? data.aws_ami.centos.id : var.ami_id
 
   user_data = var.user_data == "" ? data.template_file.user_data.rendered : var.user_data
 
@@ -56,9 +56,9 @@ resource "aws_instance" "this" {
 # user-data
 ###########
 
-data "template_file" "user_data" {
-  template = file("${path.module}/data/${var.user_data_script}")
-}
+# data "template_file" "user_data" {
+#   template = file("${path.module}/data/${var.user_data_script}")
+# }
 
 #############
 # default vpc
@@ -128,13 +128,13 @@ resource "aws_eip_association" "this" {
 # default AMI
 #############
 
-data "aws_ami" "ubuntu" {
+data "aws_ami" "centos" {
   most_recent = true
 
   filter {
     name = "name"
     values = [
-      "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
+      "CentOS Linux 7 x86_64 HVM EBS *"]
   }
 
   filter {
@@ -144,7 +144,7 @@ data "aws_ami" "ubuntu" {
   }
 
   owners = [
-    "099720109477"]
+    "aws-marketplace"]
   # Canonical
 }
 
